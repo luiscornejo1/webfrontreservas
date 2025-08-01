@@ -1,0 +1,36 @@
+.mapa-zonas {
+    position: relative;
+    width: 100%;
+    height: auto;
+    background-image: url('/assets/mapa-general.png'); /* Ruta de la imagen del mapa */
+    background-size: cover;
+}
+
+.zona {
+    position: absolute;
+    cursor: pointer;
+}
+
+.zona1 {
+    top: 20%; /* Ajustar según la posición de la zona en el mapa */
+    left: 10%; /* Ajustar según la posición de la zona en el mapa */
+    width: 15%; /* Ajustar según el tamaño de la zona */
+    height: 15%; /* Ajustar según el tamaño de la zona */
+    background-color: rgba(255, 0, 0, 0.5); /* Color de fondo semitransparente */
+}
+
+.zona2 {
+    top: 20%; /* Ajustar según la posición de la zona en el mapa */
+    left: 30%; /* Ajustar según la posición de la zona en el mapa */
+    width: 15%; /* Ajustar según el tamaño de la zona */
+    height: 15%; /* Ajustar según el tamaño de la zona */
+    background-color: rgba(0, 255, 0, 0.5); /* Color de fondo semitransparente */
+}
+
+.zona3 {
+    top: 20%; /* Ajustar según la posición de la zona en el mapa */
+    left: 50%; /* Ajustar según la posición de la zona en el mapa */
+    width: 15%; /* Ajustar según el tamaño de la zona */
+    height: 15%; /* Ajustar según el tamaño de la zona */
+    background-color: rgba(0, 0, 255, 0.5); /* Color de fondo semitransparente */
+}

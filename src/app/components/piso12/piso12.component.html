@@ -1,0 +1,38 @@
+<div class="leyenda-container" style="display:flex; gap:2rem; align-items:center; margin-bottom:1.5rem; justify-content:space-between;">
+  <div style="display:flex; gap:2rem; align-items:center;">
+    <span style="display:flex; align-items:center;"><span style="display:inline-block;width:22px;height:22px;background:#e53935;border-radius:5px;margin-right:0.5rem;"></span>Zona 1: Piso 12</span>
+    <span style="display:flex; align-items:center;"><span style="display:inline-block;width:22px;height:22px;background:#43a047;border-radius:5px;margin-right:0.5rem;"></span>Zona 2: Piso 12</span>
+    <span style="display:flex; align-items:center;"><span style="display:inline-block;width:22px;height:22px;background:#1e88e5;border-radius:5px;margin-right:0.5rem;"></span>Zona 3: Piso 12</span>
+    <span style="display:flex; align-items:center;"><span style="display:inline-block;width:22px;height:22px;background:#ff9800;border-radius:5px;margin-right:0.5rem;"></span>Zona 4: Piso 12</span>
+  </div>
+  <div style="display:flex; gap:0.5rem; align-items:center;">
+    <button routerLink="/mapa-zonas" style="padding:0.5rem 1.2rem; background:#1e88e5; color:white; border:none; border-radius:5px; font-weight:bold; cursor:pointer;">Volver a principal</button>
+    <button (click)="logout()" style="padding:0.5rem 1.2rem; background:#e53935; color:white; border:none; border-radius:5px; font-weight:bold; cursor:pointer;">Cerrar sesión</button>
+  </div>
+</div>
+<div class="plano-container" style="position:relative;">
+<img src="assets/piso12.jpg" alt="Mapa Piso 12" class="mapa-general" style="width:100%; display:block; transform: rotate(180deg);" />
+  <!-- Botón Zona 1 -->
+  <button class="btn-zona zona1" style="top:33%; left:62%; width:20%; height:8.5%; position:absolute;" routerLink="/piso12-zona1">
+    Zona 1
+    <span class="desc">Zona 1: piso 12</span>
+  </button>
+  <!-- Botón Zona 2 -->
+  <button class="btn-zona zona2" style="top:29.5%; left:20.5%; width:20%; height:12%; position:absolute;" routerLink="/piso12-zona2">
+    Zona 2
+    <span class="desc">Zona 2: piso 12</span>
+  </button>
+  <!-- Botón Zona 3 -->
+  <button class="btn-zona zona3" style="top:42%; left:20%; width:19%; height:20%; position:absolute;" routerLink="/piso12-zona3">
+    Zona 3
+    <span class="desc">Zona 3: piso 12</span>
+  </button>
+  <!-- Botón Zona 4 -->
+  <button class="btn-zona zona4" style="top:62%; left:19%; width:19%; height:14%; position:absolute; background:#ff9800; color:white; font-weight:bold;" routerLink="/piso12-zona4">
+    Zona 4
+    <span class="desc">Zona 4: Piso 12 (Personalizado)</span>
+  </button>
+
+  <!-- Imágenes acercadas -->
+
+</div>

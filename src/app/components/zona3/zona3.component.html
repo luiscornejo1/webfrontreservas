@@ -1,0 +1,51 @@
+<div class="zona-zoom-container">
+  <div class="zona-zoom-img-wrapper">
+    <!--
+      Para ajustar el zoom y la posición de la imagen animada:
+      - Modifica los valores de object-position y transform: scale en la clase .zona3-img y .zona3-img.zoom-activo en zona3.component.scss
+      - object-position: mueve la imagen (porcentaje horizontal vertical)
+      - transform: scale(X): ajusta el nivel de zoom
+      Ejemplo:
+        .zona3-img { object-position: 60% 30%; transform: scale(1); }
+        .zona3-img.zoom-activo { transform: scale(2.2); }
+      Prueba diferentes valores hasta que la zona mostrada sea la correcta.
+    -->
+    <img src="assets/zona3zoom.jpg" alt="Zoom Zona 3" class="zona-zoom-img zona3-img" [class.zoom-activo]="zoomActivo" />
+  </div>
+  <h2>Zona 3 - Tópico (Ocupado / Disponible)</h2>
+  <div class="lactario-estado-container">
+    <button class="lactario-estado-card" [ngClass]="lactario.estado" (click)="abrirModal()">
+      <span class="estado-texto">
+        <ng-container *ngIf="lactario.estado === 'ocupado'"><b>Nombre: {{ lactario.nombreCompleto }}</b></ng-container>
+        <ng-container *ngIf="lactario.estado === 'libre'">Disponible</ng-container>
+        <ng-container *ngIf="lactario.estado === 'no disponible'">No disponible</ng-container>
+      </span>
+    </button>
+  </div>
+
+  <div class="modal-overlay" *ngIf="mostrarModal" (click)="cerrarModal()">
+    <div class="modal" (click)="$event.stopPropagation()">
+      <h3>Información del Lactario</h3>
+      <p><b>Estado:</b> <span [ngClass]="lactario.estado">
+        {{ lactario.estado === 'libre' ? 'Disponible' : (lactario.estado === 'no disponible' ? 'No disponible' : lactario.estado) }}
+      </span></p>
+      <button (click)="toggleEstado()" style="margin-top:1rem;" [disabled]="lactario.estado === 'no disponible'">
+        {{ lactario.estado === 'ocupado' ? 'Disponible' : 'Ocupado' }}
+      </button>
+      <button (click)="toggleNoDisponible()" style="margin-top:0.5rem; background:#888; color:white;">
+        {{ lactario.estado === 'no disponible' ? ' Disponible' : ' NO DISPONIBLE' }}
+      </button>
+      <p *ngIf="lactario.estado === 'ocupado'">
+        Nombre: {{ lactario.nombreCompleto }}
+      </p>
+      <ng-container *ngIf="lactario.estado === 'no disponible'">
+        <p style="color:#888; margin-top:1rem;">Este espacio está marcado como <b>NO DISPONIBLE</b> y no puede ser reservado.</p>
+      </ng-container>
+      <button (click)="cerrarModal()" style="margin-top:1.5rem;">Cerrar</button>
+    </div>
+  </div>
+
+  <!-- No hay modal ni formulario de reserva en zona 3 -->
+
+  <button routerLink="/mapa-zonas" style="margin: 2rem auto 0 auto; display: block; padding: 0.7rem 2rem; font-size: 1.1rem; border-radius: 8px; background: #1a237e; color: #fff; border: none; cursor: pointer;">Volver a la página principal</button>
+</div>

@@ -1,0 +1,61 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Botones de zonas sobre el plano */
+.plano-container {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.btn-zona {
+  position: absolute;
+  border: 2px solid #fff;
+  border-radius: 16px;
+  color: #fff;
+  font-weight: bold;
+  padding: 0.7rem 1.5rem;
+  opacity: 0.85;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+  cursor: pointer;
+  transition: box-shadow 0.2s, opacity 0.2s, transform 0.2s;
+  z-index: 10;
+  font-size: 1.1rem;
+  outline: none;
+  background: transparent;
+}
+.btn-zona.zona1 {
+  background: rgba(231, 76, 60, 0.85);
+  border-color: #e74c3c;
+}
+.btn-zona.zona2 {
+  background: rgba(52, 152, 219, 0.85);
+  border-color: #3498db;
+}
+.btn-zona.zona3 {
+  background: rgba(46, 204, 113, 0.85);
+  border-color: #2ecc71;
+}
+.btn-zona:hover, .btn-zona:focus {
+  opacity: 1;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.28);
+  transform: scale(1.05);
+}
+.btn-zona .desc {
+  display: none;
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #fff;
+  color: #222;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  white-space: nowrap;
+  margin-left: 0.5rem;
+  font-size: 0.95rem;
+}
+.btn-zona:hover .desc, .btn-zona:focus .desc {
+  display: block;
+}

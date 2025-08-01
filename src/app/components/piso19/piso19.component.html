@@ -1,0 +1,40 @@
+<div class="leyenda-container" style="display:flex; gap:2rem; align-items:center; margin-bottom:1.5rem; justify-content:space-between;">
+  <div style="display:flex; gap:2rem; align-items:center;">
+    <span style="display:flex; align-items:center;"><span style="display:inline-block;width:22px;height:22px;background:#e53935;border-radius:5px;margin-right:0.5rem;"></span>Zona 1: Piso 19</span>
+    <span style="display:flex; align-items:center;"><span style="display:inline-block;width:22px;height:22px;background:#43a047;border-radius:5px;margin-right:0.5rem;"></span>Zona 2: Piso 19</span>
+    <span style="display:flex; align-items:center;"><span style="display:inline-block;width:22px;height:22px;background:#1e88e5;border-radius:5px;margin-right:0.5rem;"></span>Zona 3: Piso 19</span>
+    <span style="display:flex; align-items:center;"><span style="display:inline-block;width:22px;height:22px;background:#c7f60c;border-radius:5px;margin-right:0.5rem;"></span>Zona 4: Piso 19</span>
+  </div>
+  <div style="display:flex; gap:0.5rem; align-items:center;">
+    <button routerLink="/mapa-zonas" style="padding:0.5rem 1.2rem; background:#1e88e5; color:white; border:none; border-radius:5px; font-weight:bold; cursor:pointer;">Volver a principal</button>
+    <button (click)="logout()" style="padding:0.5rem 1.2rem; background:#e53935; color:white; border:none; border-radius:5px; font-weight:bold; cursor:pointer;">Cerrar sesión</button>
+  </div>
+</div>
+<div class="plano-container" style="position:relative;">
+  <img src="assets/piso20.jpg" alt="Mapa Piso 12" class="mapa-general" style="width:70%; display:block; transform: rotate(270deg);" />
+
+  <!-- Botón Zona 1 -->
+  <button class="btn-zona zona1" style="top:38%; left:35%; width:23%; height:12%; position:absolute;"
+    routerLink="/piso19-zona1">
+    Zona 1
+    <span class="desc">Zona 1: DIE/OPP 120-137</span>
+  </button>
+  <!-- Botón Zona 2 -->
+  <button class="btn-zona zona2" style="top:82%; left:-2.5%; width:7%; height:12%; position:absolute;"
+    routerLink="/piso19-zona2">
+    Zona 2
+    <span class="desc">Zona 2: OAJ 01-06</span>
+  </button>
+  <!-- Botón Zona 3 -->
+  <button class="btn-zona zona3" style="top:82%; left:4.5%; width:10%; height:8%; position:absolute;"
+    routerLink="/piso19-zona3">
+    Zona 3
+    <span class="desc">Zona 3: DE/DIE 01-06, 138-143</span>
+  </button>
+  <!-- Botón Zona 4 -->
+  <button class="btn-zona zona4" style="top:90%; left:4.5%; width:10%; height:4%; position:absolute; background:#8e24aa; color:white; font-weight:bold; font-size:1.2rem; border-radius:16px; border:none; box-shadow:0 2px 12px rgba(0,0,0,0.08); z-index:10; opacity:0.95;"
+    routerLink="/piso19-zona4">
+    Zona 4
+    <span class="desc">Zona 4: DIE 151-166</span>
+  </button>
+</div>

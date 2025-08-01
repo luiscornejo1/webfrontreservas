@@ -1,0 +1,91 @@
+/* Estilos para Zona 3 */
+.zona3-container {
+  max-width: 500px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.10);
+}
+.grilla-puestos {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  justify-content: center;
+}
+.puesto-btn {
+  min-width: 120px;
+  min-height: 80px;
+  border-radius: 8px;
+  border: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  background: #e0e0e0;
+  color: #222;
+  transition: box-shadow 0.2s, background 0.2s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.puesto-btn.ocupado {
+  background: #e53935;
+  color: #fff;
+}
+.puesto-btn.libre {
+  background: #43a047;
+  color: #fff;
+}
+.puesto-btn:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+  opacity: 0.95;
+}
+.icon {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  margin-bottom: 0.5rem;
+}
+.icon.ocupado {
+  background: #e53935;
+  border: 2px solid #b71c1c;
+}
+.icon.libre {
+  background: #43a047;
+  border: 2px solid #1b5e20;
+}
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.modal {
+  background: #fff;
+  padding: 2rem 2.5rem;
+  border-radius: 10px;
+  min-width: 300px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.18);
+  position: relative;
+}
+.modal h3 {
+  margin-top: 0;
+}
+.modal .ocupado { color: #e53935; }
+.modal .libre { color: #43a047; }
+.modal button {
+  margin-top: 1.5rem;
+  padding: 0.5rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  background: #1a237e;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+}

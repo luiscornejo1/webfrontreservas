@@ -1,0 +1,255 @@
+/* Modern seat grid and state styles for Piso 19 Zona 4 (copied from piso19-zona3) */
+.zona-zoom-container {
+  padding: 1.5rem;
+}
+.zona-zoom-img-wrapper {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  width: 100%;
+  height: 520px;
+  overflow: hidden;
+  border-radius: 16px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.10);
+  position: relative;
+}
+.zona-zoom-img {
+  max-width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center center;
+  transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1), object-position 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
+}
+.grilla-asientos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1rem;
+  padding: 1rem 0;
+  margin-bottom: 2rem;
+}
+.asiento-card {
+  position: relative;
+  width: 100%;
+  min-height: 90px;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  font-size: 1.1rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 1.2rem 0.5rem 0.7rem 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: box-shadow 0.2s, transform 0.2s, opacity 0.2s;
+  outline: none;
+  overflow: visible;
+}
+.asiento-card.libre {
+  background: linear-gradient(135deg, #e8f5e9 70%, #c8e6c9 100%);
+  color: #2e7d32;
+  border: none;
+  box-shadow: 0 4px 18px 0 rgba(76,175,80,0.10);
+}
+.asiento-card.ocupado {
+  background: linear-gradient(135deg, #ffebee 70%, #ffcdd2 100%);
+  color: #c62828;
+  border: none;
+  box-shadow: 0 4px 18px 0 rgba(244,67,54,0.10);
+}
+.asiento-card.no\ disponible {
+  background: #eeeeee !important;
+  background-image: none !important;
+  color: #888 !important;
+  border: 2px solid #bdbdbd !important;
+  box-shadow: 0 2px 8px rgba(100,100,100,0.08) !important;
+  filter: none !important;
+  outline: none !important;
+  font-weight: 600 !important;
+}
+.asiento-card.no\ disponible .codigo {
+  color: #888 !important;
+}
+.asiento-card:hover, .asiento-card:focus {
+  box-shadow: 0 6px 24px rgba(0,0,0,0.18);
+  transform: scale(1.06);
+  opacity: 0.96;
+  z-index: 2;
+}
+.codigo {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+.tooltip {
+  visibility: hidden;
+  opacity: 0;
+  width: max-content;
+  background: #222;
+  color: #fff;
+  text-align: center;
+  border-radius: 10px;
+  padding: 0.35rem 1.1rem;
+  position: absolute;
+  z-index: 20;
+  left: 50%;
+  top: -2.5rem;
+  transform: translateX(-50%);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+  font-size: 1.05rem;
+  font-weight: 600;
+  pointer-events: none;
+  transition: opacity 0.18s, visibility 0.18s;
+  white-space: nowrap;
+  border: none;
+}
+.asiento-card:hover .tooltip,
+.asiento-card:focus .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+/* Estilos para Piso 19 Zona 4 (idénticos a las otras zonas modernas) */
+.zona-zoom-container {
+  padding: 1.5rem;
+}
+.zona-zoom-img-wrapper {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  width: 100%;
+  height: 520px;
+  overflow: hidden;
+  border-radius: 16px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.10);
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+.zona-zoom-img {
+  max-width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center center;
+  transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1), object-position 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
+}
+.zona4-img {
+  object-position: center center;
+  transform: scale(1);
+}
+.grilla-asientos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1rem;
+  padding: 1rem 0;
+  margin-bottom: 2rem;
+}
+.asiento-card {
+  position: relative;
+  width: 100%;
+  min-height: 90px;
+  border-radius: 16px;
+  border: none;
+  background: #f8fafc;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  font-size: 1.1rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 1.2rem 0.5rem 0.7rem 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: box-shadow 0.2s, transform 0.2s, opacity 0.2s;
+  outline: none;
+  overflow: visible;
+}
+.asiento-card.libre {
+  background: linear-gradient(135deg, #e8f5e9 70%, #c8e6c9 100%);
+  color: #388e3c;
+}
+.asiento-card.ocupado {
+  background: linear-gradient(135deg, #ffebee 70%, #ffcdd2 100%);
+  color: #c62828;
+}
+.asiento-card:hover, .asiento-card:focus {
+  box-shadow: 0 6px 24px rgba(0,0,0,0.18);
+  transform: scale(1.06);
+  opacity: 0.96;
+  z-index: 2;
+}
+.codigo {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+}
+.tooltip {
+  visibility: hidden;
+  opacity: 0;
+  background: #222;
+  color: #fff;
+  text-align: center;
+  border-radius: 8px;
+  padding: 0.4rem 0.8rem;
+  position: absolute;
+  left: 50%;
+  bottom: 110%;
+  transform: translateX(-50%);
+  font-size: 0.95rem;
+  pointer-events: none;
+  transition: opacity 0.2s, visibility 0.2s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+  white-space: nowrap;
+}
+.asiento-card:hover .tooltip,
+.asiento-card:focus .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+@media (max-width: 600px) {
+  .grilla-asientos {
+    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+    gap: 0.5rem;
+  }
+  .asiento-card {
+    min-height: 60px;
+    font-size: 0.98rem;
+    padding: 0.7rem 0.2rem 0.5rem 0.2rem;
+  }
+  .codigo {
+    font-size: 1rem;
+  }
+}
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.modal {
+  background: #fff;
+  padding: 2rem 2.5rem;
+  border-radius: 10px;
+  min-width: 300px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.18);
+  position: relative;
+}
+.modal h3 {
+  margin-top: 0;
+}
+.modal .ocupado { color: #e53935; }
+.modal .libre { color: #43a047; }
+.modal button {
+  margin-top: 1.5rem;
+  padding: 0.5rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  background: #1a237e;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+}

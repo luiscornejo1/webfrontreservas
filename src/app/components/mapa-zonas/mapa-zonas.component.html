@@ -1,0 +1,51 @@
+<div class="leyenda-container" style="display:flex; gap:2rem; align-items:center; margin-bottom:1.5rem; justify-content:space-between;">
+  <div style="display:flex; gap:2rem; align-items:center;">
+    <span style="display:flex; align-items:center;"><span style="display:inline-block;width:22px;height:22px;background:#e53935;border-radius:5px;margin-right:0.5rem;"></span>Zona 1: Piso 20 (DIE/OPP 120-137)</span>
+    <span style="display:flex; align-items:center;"><span style="display:inline-block;width:22px;height:22px;background:#43a047;border-radius:5px;margin-right:0.5rem;"></span>Zona 2: Piso 20 (OAJ 01-06)</span>
+    <span style="display:flex; align-items:center;"><span style="display:inline-block;width:22px;height:22px;background:#1e88e5;border-radius:5px;margin-right:0.5rem;"></span>Zona 3: Lactario</span>
+  </div>
+  <div style="display:flex; gap:0.5rem; align-items:center;">
+    <button routerLink="/piso19" style="padding:0.5rem 1.2rem; background:#1e88e5; color:white; border:none; border-radius:5px; font-weight:bold; cursor:pointer;">Ir a Piso 19</button>
+    <button routerLink="/piso12" style="padding:0.5rem 1.2rem; background:#43a047; color:white; border:none; border-radius:5px; font-weight:bold; cursor:pointer;">Ir a Piso 12</button>
+    <button (click)="logout()" style="padding:0.5rem 1.2rem; background:#e53935; color:white; border:none; border-radius:5px; font-weight:bold; cursor:pointer;">Cerrar sesión</button>
+  </div>
+</div>
+<div class="plano-container" style="position:relative;">
+  <img src="assets/piso19completo.jpg" alt="Mapa General" class="mapa-general" style="width:100%; display:block;" />
+
+  <!-- Botón Zona 1 -->
+  <!--
+    Para mover la zona 1 (roja):
+    - Modifica los valores de 'top', 'left', 'width' y 'height' en el atributo style.
+    - Ejemplo: top:8%; left:2.5%; width:18%; height:15%;
+    - 'top' y 'left' controlan la posición (porcentaje respecto al contenedor).
+    - 'width' y 'height' controlan el tamaño del área sombreada.
+    - Ajusta estos valores hasta que la zona quede alineada con el plano.
+  -->
+  <button class="btn-zona zona1" style="top:62%; left:20%; width:20%; height:8.5%;" routerLink="/zona1">
+    Zona 1
+    <span class="desc">Zona 1: DIE/OPP 120-137</span>
+  </button>
+  <!-- Botón Zona 2 -->
+  <!--
+    Para mover la zona 2 (verde):
+    - Modifica los valores de 'top', 'left', 'width' y 'height' en el atributo style.
+    - Ejemplo: top:13%; left:41%; width:18%; height:15%;
+    - Usa porcentajes para ubicar la zona sobre el plano según tu imagen.
+  -->
+  <button class="btn-zona zona2" style="top:53.5%; left:20%; width:8%; height:8.5%;" routerLink="/zona2">
+    Zona 2
+    <span class="desc">Zona 2: OAJ 01-06</span>
+  </button>
+  <!-- Botón Zona 3 -->
+  <!--
+    Para mover la zona 3 (azul):
+    - Modifica los valores de 'top', 'left', 'width' y 'height' en el atributo style.
+    - Ejemplo: top:70%; left:2.5%; width:18%; height:15%;
+    - Puedes probar diferentes valores hasta que la zona quede bien posicionada.
+  -->
+  <button class="btn-zona zona3" style="top:37%; left:19%; width:7%; height:8%;" routerLink="/zona3">
+    Zona 3
+    <span class="desc">Zona 3: DE/DIE 01-06, 138-143</span>
+  </button>
+</div>

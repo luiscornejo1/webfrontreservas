@@ -1,0 +1,54 @@
+<div class="zona-zoom-container piso12-zona3-container">
+  <div class="zona-zoom-img-wrapper">
+    <img src="assets/zona3piso12zoom.jpg" alt="Zoom Zona 3 Piso 12" class="zona-zoom-img zona3-img" />
+  </div>
+  <h2>Piso 12 - Zona 3</h2>
+  <div class="grilla-asientos">
+    <button *ngFor="let asiento of asientos"
+            class="asiento-card"
+            [ngClass]="asiento.estado"
+            (click)="seleccionarAsiento(asiento)"
+            [attr.aria-label]="asiento.estado === 'ocupado' ? 'Ocupado por ' + asiento.nombre : 'Disponible'">
+      <span class="codigo">{{ asiento.codigo }}</span>
+      <span class="tooltip">
+        <ng-container *ngIf="esOcupado(asiento.estado)">Nombre: {{ asiento.nombre }}</ng-container>
+        <ng-container *ngIf="esLibre(asiento.estado)">Disponible</ng-container>
+        <ng-container *ngIf="esNoDisponible(asiento.estado)">No disponible</ng-container>
+        <ng-container *ngIf="asiento.estado === 'no disponible'">No disponible</ng-container>
+      </span>
+    </button>
+  </div>
+  <!-- Modal simple -->
+  <div class="modal-overlay" *ngIf="mostrarModal" (click)="cerrarModal()">
+    <div class="modal" (click)="$event.stopPropagation()">
+      <h3>Información de Asiento</h3>
+      <p><b>Código:</b> {{ asientoSeleccionado?.codigo }}</p>
+      <p><b>Estado:</b> <span [ngClass]="asientoSeleccionado?.estado">
+        {{ esLibre(asientoSeleccionado?.estado) ? 'Disponible' : (esNoDisponible(asientoSeleccionado?.estado) ? 'No disponible' : asientoSeleccionado?.estado) }}
+      </span></p>
+      <button (click)="toggleEstado()" style="margin-top:1rem;" [disabled]="esNoDisponible(asientoSeleccionado?.estado)">
+         {{ esOcupado(asientoSeleccionado?.estado) ? 'Disponible' : 'Ocupado' }}
+      </button>
+      <button (click)="toggleNoDisponible()" style="margin-top:0.5rem; background:#888; color:white;">
+        {{ esNoDisponible(asientoSeleccionado?.estado) ? ' Disponible' : ' NO DISPONIBLE' }}
+      </button>
+      <p *ngIf="asientoSeleccionado?.estado === 'ocupado'">
+        Nombre: {{ asientoSeleccionado?.nombre }}
+      </p>
+      <ng-container *ngIf="esLibre(asientoSeleccionado?.estado)">
+        <form (ngSubmit)="reservarAsiento()" style="margin-top:1rem;">
+          <label>Tu nombre para reservar:</label>
+          <input [(ngModel)]="nombreReserva" name="nombreReserva" required style="margin-left:0.5rem;" />
+          <button type="submit" [disabled]="!nombreReserva">Reservar</button>
+        </form>
+        <p *ngIf="reservaExitosa" style="color:green;">¡Reserva exitosa!</p>
+        <p *ngIf="errorReserva" style="color:red;">{{ errorReserva }}</p>
+      </ng-container>
+      <ng-container *ngIf="esNoDisponible(asientoSeleccionado?.estado)">
+        <p style="color:#888; margin-top:1rem;">Este asiento está marcado como <b>NO DISPONIBLE</b> y no puede ser reservado.</p>
+      </ng-container>
+      <button (click)="cerrarModal()" style="margin-top:1.5rem;">Cerrar</button>
+    </div>
+  </div>
+  <button routerLink="/piso12" style="margin: 2rem auto 0 auto; display: block; padding: 0.7rem 2rem; font-size: 1.1rem; border-radius: 8px; background: #1a237e; color: #fff; border: none; cursor: pointer;">Volver a Piso 12</button>
+</div>
