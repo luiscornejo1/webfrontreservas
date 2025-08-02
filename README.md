@@ -1,27 +1,67 @@
-# Reservasitios
+# Documentación de Despliegue y Ejecución
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.16.
+## Frontend (Angular)
 
-## Development server
+### Comandos para desarrollo local
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+```bash
+# Instalar dependencias
+npm install
 
-## Code scaffolding
+# Iniciar servidor de desarrollo (usa environment.ts)
+ng serve
+```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- Accede a la app en: http://localhost:4200
+- El frontend hará peticiones al backend en http://localhost:8080 (ajusta en environment.ts si es necesario).
 
-## Build
+### Comando para producción
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+```bash
+# Generar build de producción (usa environment.prod.ts)
+ng build --configuration=production
+```
 
-## Running unit tests
+- Los archivos optimizados se generan en la carpeta `dist/`.
+- Sube el contenido de `dist/` a tu servidor web (Vercel, Netlify, Apache, Nginx, S3, etc).
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+---
 
-## Running end-to-end tests
+## Backend (Spring Boot)
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### Comandos para desarrollo local
 
-## Further help
+```bash
+# Desde la carpeta del backend
+# Usando Maven Wrapper (recomendado)
+./mvnw spring-boot:run
+# O si tienes Maven instalado
+mvn spring-boot:run
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+- El backend estará disponible en: http://localhost:8080
+- Puedes cambiar el puerto en `application.properties` con `server.port`.
+
+### Comando para producción
+
+```bash
+# Generar el .jar para producción
+./mvnw clean package -Pprod
+# O con Maven instalado
+mvn clean package -Pprod
+```
+
+- El archivo se genera en `target/backend-reservas-0.0.1-SNAPSHOT.jar` (o similar).
+- Sube el .jar a tu servidor y ejecútalo con:
+
+```bash
+java -jar backend-reservas-0.0.1-SNAPSHOT.jar
+```
+
+---
+
+## Notas
+- Ajusta las URLs en los archivos `environment.ts` y `environment.prod.ts` del frontend según tu entorno.
+- Configura CORS en el backend para aceptar peticiones del frontend en producción.
+- Para pruebas locales, asegúrate de que ambos servidores (frontend y backend) estén corriendo.
+- Si tienes dudas, revisa los archivos de configuración o consulta esta guía.

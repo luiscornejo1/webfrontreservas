@@ -14,7 +14,7 @@ export class LoginComponent {
   constructor(private router: Router) {}
 
   login() {
-    if (this.username === 'admin' && this.password === 'admin') {
+    if (this.username === 'admin' && this.password === 'abc123') {
       this.error = '';
       this.router.navigate(['/mapa-zonas']);
     } else {
