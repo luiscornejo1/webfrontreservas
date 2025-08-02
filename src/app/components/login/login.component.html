@@ -1,9 +1,18 @@
-<div class="login-container">
-  <h2>Iniciar Sesión</h2>
-  <form (ngSubmit)="login()">
-    <input type="text" placeholder="Usuario" [(ngModel)]="username" name="username" required />
-    <input type="password" placeholder="Contraseña" [(ngModel)]="password" name="password" required />
-    <button type="submit">Entrar</button>
-    <div class="error" *ngIf="error">{{ error }}</div>
-  </form>
+<div class="login-bg-full">
+  <video autoplay loop muted playsinline class="login-bg-video">
+    <source src="assets/callcenterloginvideo.mp4" type="video/mp4" />
+    Tu navegador no soporta video HTML5.
+  </video>
+  <div class="login-card-centered">
+    <div class="login-card">
+      <h3>Proyecto Reservas</h3>
+      <h2>Ingresa al sistema</h2>
+      <form (ngSubmit)="login()">
+        <input type="text" placeholder="Usuario" [(ngModel)]="username" name="username" required />
+        <input type="password" placeholder="Contraseña" [(ngModel)]="password" name="password" required />
+        <button type="submit">Entrar</button>
+        <div class="error" *ngIf="error">{{ error }}</div>
+      </form>
+    </div>
+  </div>
 </div>

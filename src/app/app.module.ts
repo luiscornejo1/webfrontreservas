@@ -20,7 +20,10 @@ import { LoginComponent } from './components/login/login.component';
 import { Piso19Component } from './components/piso19/piso19.component';
 import { Piso12Component } from './components/piso12/piso12.component';
 import { HttpClientModule } from '@angular/common/http';
-
+import { ConfirmDialogComponent } from './shared/confirm-dialog/confirm-dialog.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -39,14 +42,18 @@ import { HttpClientModule } from '@angular/common/http';
     Piso12Zona2Component,
     Piso12Zona3Component,
     Piso12Zona4Component,
-    Piso19Zona4Component
+    Piso19Zona4Component,
+    ConfirmDialogComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     CommonModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatDialogModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -26,20 +26,27 @@
       <p><b>Estado:</b> <span [ngClass]="{'ocupado': asientoSeleccionado?.estado === 'ocupado', 'libre': asientoSeleccionado?.estado === 'libre', 'no-disponible': asientoSeleccionado?.estado === 'no disponible'}">
         {{ asientoSeleccionado?.estado === 'libre' ? 'Disponible' : (asientoSeleccionado?.estado === 'no disponible' ? 'No disponible' : asientoSeleccionado?.estado) }}
       </span></p>
-      <button (click)="toggleEstado()" style="margin-top:1rem;" [disabled]="asientoSeleccionado?.estado === 'no disponible'">
-        {{ asientoSeleccionado?.estado === 'ocupado' ? 'Disponible' : 'Ocupado' }}
-      </button>
-      <button (click)="toggleNoDisponible()" style="margin-top:0.5rem; background:#888; color:white;">
-        {{ asientoSeleccionado?.estado === 'no disponible' ? ' Disponible' : ' NO DISPONIBLE' }}
-      </button>
+      <div class="modal-btn-row">
+        <button (click)="toggleEstado()"
+          class="btn-modal"
+          [ngClass]="esOcupado(asientoSeleccionado?.estado) ? 'btn-verde' : 'btn-rojo'"
+          [disabled]="esNoDisponible(asientoSeleccionado?.estado)">
+           {{ esOcupado(asientoSeleccionado?.estado) ? 'Disponible' : 'Ocupar' }}
+        </button>
+        <button (click)="toggleNoDisponible()" class="btn-modal btn-gris">
+          {{ esNoDisponible(asientoSeleccionado?.estado) ? ' Disponible' : ' NO DISPONIBLE' }}
+        </button>
+      </div>
       <p *ngIf="asientoSeleccionado?.estado === 'ocupado'">
         Nombre: {{ asientoSeleccionado?.nombre }}
       </p>
-      <ng-container *ngIf="asientoSeleccionado?.estado === 'libre'">
-        <form (ngSubmit)="reservarAsiento()" style="margin-top:1rem;">
-          <label>Tu nombre para reservar:</label>
-          <input [(ngModel)]="nombreReserva" name="nombreReserva" required style="margin-left:0.5rem;" />
-          <button type="submit" [disabled]="!nombreReserva">Reservar</button>
+      <ng-container *ngIf="esLibre(asientoSeleccionado?.estado)">
+        <form (ngSubmit)="reservarAsiento()" class="form-reserva-modal">
+          <label for="nombreReservaInput">Tu nombre para reservar:</label>
+          <div class="form-reserva-row">
+            <input id="nombreReservaInput" [(ngModel)]="nombreReserva" name="nombreReserva" required class="input-reserva-modal" />
+            <button type="submit" [disabled]="!nombreReserva" class="btn-modal btn-azul">Reservar</button>
+          </div>
         </form>
         <p *ngIf="reservaExitosa" style="color:green;">¡Reserva exitosa!</p>
         <p *ngIf="errorReserva" style="color:red;">{{ errorReserva }}</p>
@@ -47,7 +54,7 @@
       <ng-container *ngIf="asientoSeleccionado?.estado === 'no disponible'">
         <p style="color:#888; margin-top:1rem;">Este asiento está marcado como <b>NO DISPONIBLE</b> y no puede ser reservado.</p>
       </ng-container>
-      <button (click)="cerrarModal()" style="margin-top:1.5rem;">Cerrar</button>
+      <button (click)="cerrarModal()" class="btn-modal btn-rojo" style="margin-top:2rem;">Cerrar</button>
     </div>
   </div>
 

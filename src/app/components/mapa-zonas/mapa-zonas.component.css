@@ -16,7 +16,7 @@
     left: 10%; /* Ajustar según la posición de la zona en el mapa */
     width: 15%; /* Ajustar según el tamaño de la zona */
     height: 15%; /* Ajustar según el tamaño de la zona */
-    background-color: rgba(255, 0, 0, 0.5); /* Color de fondo semitransparente */
+    background-color: rgba(255, 0, 0, 1); /* Color de fondo semitransparente */
 }
 
 .zona2 {
@@ -24,7 +24,7 @@
     left: 30%; /* Ajustar según la posición de la zona en el mapa */
     width: 15%; /* Ajustar según el tamaño de la zona */
     height: 15%; /* Ajustar según el tamaño de la zona */
-    background-color: rgba(0, 255, 0, 0.5); /* Color de fondo semitransparente */
+    background-color: rgba(0, 0, 0, 1); /* Color de fondo semitransparente */
 }
 
 .zona3 {
@@ -32,5 +32,5 @@
     left: 50%; /* Ajustar según la posición de la zona en el mapa */
     width: 15%; /* Ajustar según el tamaño de la zona */
     height: 15%; /* Ajustar según el tamaño de la zona */
-    background-color: rgba(0, 0, 255, 0.5); /* Color de fondo semitransparente */
+    background-color: rgba(0, 0, 255, 1); /* Color de fondo semitransparente */
 }

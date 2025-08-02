@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from 'src/app/shared/confirm-dialog/confirm-dialog.component';
+import { AsientosService } from 'src/app/services/asientos.service';
+import { Asiento } from 'src/app/models/asiento.model';
 
 @Component({
   selector: 'app-zona2',
@@ -6,6 +10,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./zona2.component.css', './zona2.component.scss']
 })
 export class Zona2Component implements OnInit {
+  zoomActivo = false;
+  asientos: Asiento[] = [];
+  mostrarModal = false;
+  asientoSeleccionado: Asiento | null = null;
+  nombreReserva = '';
+  reservaExitosa = false;
+  errorReserva = '';
+
+  constructor(
+    private asientosService: AsientosService,
+    private cdr: ChangeDetectorRef,
+    private dialog: MatDialog
+  ) {}
+
   // Helpers para la plantilla
   esNoDisponible(estado: string | undefined): boolean {
     return estado === 'no disponible';
@@ -16,39 +34,22 @@ export class Zona2Component implements OnInit {
   esOcupado(estado: string | undefined): boolean {
     return estado === 'ocupado';
   }
-  zoomActivo = false;
+
   ngOnInit() {
     setTimeout(() => {
       this.zoomActivo = true;
     }, 100);
+    this.cargarAsientos();
   }
-  asientos: { codigo: string, nombre: string | null, estado: 'ocupado' | 'libre' | 'no disponible' }[] = [
-    { codigo: 'DIE 201', nombre: null, estado: 'libre' },
-    { codigo: 'OPP 20', nombre: 'Ana López', estado: 'ocupado' },
-    { codigo: 'OAJ 12', nombre: null, estado: 'libre' },
-    { codigo: 'DIE 202', nombre: null, estado: 'no disponible' },
-    { codigo: 'OPP 21', nombre: 'Carlos Ruiz', estado: 'ocupado' },
-    { codigo: 'OAJ 13', nombre: null, estado: 'libre' },
-    { codigo: 'DE 01', nombre: null, estado: 'libre' },
-    { codigo: 'DE 02', nombre: null, estado: 'libre' },
-    { codigo: 'DE 03', nombre: null, estado: 'libre' },
-    { codigo: 'DE 04', nombre: null, estado: 'libre' },
-    { codigo: 'DE 05', nombre: null, estado: 'libre' },
-    { codigo: 'DE 06', nombre: null, estado: 'libre' },
-    { codigo: 'DIE 138', nombre: null, estado: 'libre' },
-    { codigo: 'DIE 139', nombre: null, estado: 'libre' },
-    { codigo: 'DIE 140', nombre: null, estado: 'libre' },
-    { codigo: 'DIE 141', nombre: null, estado: 'libre' },
-    { codigo: 'DIE 142', nombre: null, estado: 'libre' },
-    { codigo: 'DIE 143', nombre: null, estado: 'libre' }
-  ];
-  mostrarModal = false;
-  asientoSeleccionado: { codigo: string, nombre: string | null, estado: 'ocupado' | 'libre' | 'no disponible' } | null = null;
-  nombreReserva = '';
-  reservaExitosa = false;
-  errorReserva = '';
 
-  seleccionarAsiento(asiento: any) {
+  cargarAsientos() {
+    this.asientosService.getAsientosPorZona('zona2').subscribe({
+      next: (data) => this.asientos = data,
+      error: (err) => console.error('Error cargando asientos', err)
+    });
+  }
+
+  seleccionarAsiento(asiento: Asiento) {
     this.asientoSeleccionado = { ...asiento };
     this.mostrarModal = true;
     this.nombreReserva = '';
@@ -69,58 +70,114 @@ export class Zona2Component implements OnInit {
       this.errorReserva = 'Debes ingresar tu nombre.';
       return;
     }
-    const idx = this.asientos.findIndex(a => a.codigo === this.asientoSeleccionado?.codigo);
-    if (idx !== -1 && this.asientos[idx].estado === 'libre') {
-      this.asientos[idx].estado = 'ocupado';
-      this.asientos[idx].nombre = this.nombreReserva;
-      if (this.asientoSeleccionado) {
-        this.asientoSeleccionado.estado = 'ocupado';
-        this.asientoSeleccionado.nombre = this.nombreReserva;
+    if (!this.asientoSeleccionado) return;
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: { message: '¿Deseas reservar este asiento?' }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        const reserva = {
+          ...this.asientoSeleccionado!,
+          nombre: this.nombreReserva,
+          estado: 'ocupado'
+        };
+        this.asientosService.cambiarEstado(reserva).subscribe({
+          next: () => {
+            this.reservaExitosa = true;
+            this.errorReserva = '';
+            this.cargarAsientos();
+            this.mostrarModal = false;
+          },
+          error: (err) => {
+            this.errorReserva = 'Error al reservar asiento';
+          }
+        });
       }
-      this.reservaExitosa = true;
-      this.errorReserva = '';
-    } else if (idx !== -1 && this.asientos[idx].estado === 'no disponible') {
-      this.errorReserva = 'El asiento está marcado como NO DISPONIBLE.';
-    } else {
-      this.errorReserva = 'El asiento ya está ocupado.';
-    }
+    });
   }
 
+  // Método para alternar estado entre ocupado y libre (con confirmación)
   toggleEstado(): void {
     if (this.asientoSeleccionado && this.asientoSeleccionado.estado !== 'no disponible') {
-      const idx = this.asientos.findIndex(a => a.codigo === this.asientoSeleccionado!.codigo);
-      if (this.asientoSeleccionado.estado === 'ocupado') {
-        this.asientoSeleccionado.estado = 'libre';
-        this.asientoSeleccionado.nombre = null;
-        if (idx !== -1) {
-          this.asientos[idx].estado = 'libre';
-          this.asientos[idx].nombre = null;
+      const esOcupado = this.asientoSeleccionado.estado === 'ocupado';
+      const mensaje = esOcupado
+        ? '¿Estás seguro de liberar este asiento?'
+        : '¿Deseas reservar este asiento?';
+      const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+        data: { message: mensaje }
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          const nuevoEstado = esOcupado ? 'libre' : 'ocupado';
+          const asientoActualizado = {
+            ...this.asientoSeleccionado!,
+            estado: nuevoEstado,
+            nombre: nuevoEstado === 'libre' ? '' : this.asientoSeleccionado!.nombre || ''
+          };
+          this.asientosService.cambiarEstado(asientoActualizado).subscribe({
+            next: () => {
+              this.cargarAsientos();
+              if (asientoActualizado.id !== undefined) {
+                this.asientosService.getAsientoById(asientoActualizado.id as number).subscribe({
+                  next: (asientoActualizadoBackend) => {
+                    this.asientoSeleccionado = { ...asientoActualizadoBackend };
+                    this.cdr.detectChanges();
+                  },
+                  error: () => {
+                    const actualizado = this.asientos.find(a => a.id === asientoActualizado.id);
+                    if (actualizado) this.asientoSeleccionado = { ...actualizado };
+                    this.cdr.detectChanges();
+                  }
+                });
+              }
+              if (nuevoEstado === 'libre') {
+                this.nombreReserva = '';
+                this.reservaExitosa = false;
+                this.errorReserva = '';
+              }
+            },
+            error: () => this.errorReserva = 'Error al cambiar estado'
+          });
         }
-      } else {
-        this.asientoSeleccionado.estado = 'ocupado';
-        this.asientoSeleccionado.nombre = 'Reservado manualmente';
-        if (idx !== -1) {
-          this.asientos[idx].estado = 'ocupado';
-          this.asientos[idx].nombre = 'Reservado manualmente';
-        }
-      }
+      });
     }
   }
 
+  // Método para marcar/desmarcar como no disponible (con confirmación)
   toggleNoDisponible(): void {
     if (this.asientoSeleccionado) {
-      const idx = this.asientos.findIndex(a => a.codigo === this.asientoSeleccionado!.codigo);
-      if (this.asientoSeleccionado.estado === 'no disponible') {
-        this.asientoSeleccionado.estado = 'libre';
-        if (idx !== -1) this.asientos[idx].estado = 'libre';
-      } else {
-        this.asientoSeleccionado.estado = 'no disponible';
-        this.asientoSeleccionado.nombre = null;
-        if (idx !== -1) {
-          this.asientos[idx].estado = 'no disponible';
-          this.asientos[idx].nombre = null;
+      const esNoDisponible = this.asientoSeleccionado.estado === 'no disponible';
+      const mensaje = esNoDisponible
+        ? '¿Deseas marcar este asiento como disponible?'
+        : '¿Deseas marcar este asiento como NO DISPONIBLE?';
+      const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+        data: { message: mensaje }
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          const nuevoEstado = esNoDisponible ? 'libre' : 'no disponible';
+          const asientoActualizado = { ...this.asientoSeleccionado, estado: nuevoEstado };
+          this.asientosService.cambiarEstado(asientoActualizado).subscribe({
+            next: () => {
+              this.cargarAsientos();
+              if (asientoActualizado.id !== undefined) {
+                this.asientosService.getAsientoById(asientoActualizado.id as number).subscribe({
+                  next: (asientoActualizadoBackend) => {
+                    this.asientoSeleccionado = { ...asientoActualizadoBackend };
+                    this.cdr.detectChanges();
+                  },
+                  error: () => {
+                    const actualizado = this.asientos.find(a => a.id === asientoActualizado.id);
+                    if (actualizado) this.asientoSeleccionado = { ...actualizado };
+                    this.cdr.detectChanges();
+                  }
+                });
+              }
+            },
+            error: () => this.errorReserva = 'Error al cambiar estado'
+          });
         }
-      }
+      });
     }
   }
 }

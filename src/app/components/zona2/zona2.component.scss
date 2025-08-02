@@ -1,3 +1,4 @@
+@import '../../components/zona1/zona1.component.scss';
 // ...existing code...
 .ocupado {
   color: #c62828 !important;
@@ -201,7 +202,7 @@
 .modal .ocupado { color: #7c4dff; }
 .modal .libre { color: #43a047; }
 .modal button {
-  margin-top: 1.5rem;
+  margin-top: 0rem;
   padding: 0.5rem 1.2rem;
   border: none;
   border-radius: 6px;

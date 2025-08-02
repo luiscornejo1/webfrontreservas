@@ -14,34 +14,36 @@
   </div>
   <h2>Zona 3 - Tópico (Ocupado / Disponible)</h2>
   <div class="lactario-estado-container">
-    <button class="lactario-estado-card" [ngClass]="lactario.estado" (click)="abrirModal()">
+    <button class="lactario-estado-card" [ngClass]="asientos[0].estado" (click)="seleccionarAsiento(asientos[0])" *ngIf="asientos.length">
       <span class="estado-texto">
-        <ng-container *ngIf="lactario.estado === 'ocupado'"><b>Nombre: {{ lactario.nombreCompleto }}</b></ng-container>
-        <ng-container *ngIf="lactario.estado === 'libre'">Disponible</ng-container>
-        <ng-container *ngIf="lactario.estado === 'no disponible'">No disponible</ng-container>
+        <ng-container *ngIf="asientos[0].estado === 'ocupado'"><b>Ocupado</b></ng-container>
+        <ng-container *ngIf="asientos[0].estado === 'libre'">Disponible</ng-container>
+        <ng-container *ngIf="asientos[0].estado === 'no disponible'">No disponible</ng-container>
       </span>
     </button>
   </div>
 
-  <div class="modal-overlay" *ngIf="mostrarModal" (click)="cerrarModal()">
+  <div class="modal-overlay" *ngIf="mostrarModal && asientoSeleccionado" (click)="cerrarModal()">
     <div class="modal" (click)="$event.stopPropagation()">
       <h3>Información del Lactario</h3>
-      <p><b>Estado:</b> <span [ngClass]="lactario.estado">
-        {{ lactario.estado === 'libre' ? 'Disponible' : (lactario.estado === 'no disponible' ? 'No disponible' : lactario.estado) }}
+      <p><b>Estado:</b> <span [ngClass]="asientoSeleccionado.estado">
+        {{ asientoSeleccionado.estado === 'libre' ? 'Disponible' : (asientoSeleccionado.estado === 'no disponible' ? 'No disponible' : asientoSeleccionado.estado) }}
       </span></p>
-      <button (click)="toggleEstado()" style="margin-top:1rem;" [disabled]="lactario.estado === 'no disponible'">
-        {{ lactario.estado === 'ocupado' ? 'Disponible' : 'Ocupado' }}
-      </button>
-      <button (click)="toggleNoDisponible()" style="margin-top:0.5rem; background:#888; color:white;">
-        {{ lactario.estado === 'no disponible' ? ' Disponible' : ' NO DISPONIBLE' }}
-      </button>
-      <p *ngIf="lactario.estado === 'ocupado'">
-        Nombre: {{ lactario.nombreCompleto }}
-      </p>
-      <ng-container *ngIf="lactario.estado === 'no disponible'">
+      <div class="modal-btn-row">
+        <button (click)="toggleEstado()"
+          class="btn-modal"
+          [ngClass]="esOcupado(asientoSeleccionado?.estado) ? 'btn-verde' : 'btn-rojo'"
+          [disabled]="esNoDisponible(asientoSeleccionado?.estado)">
+           {{ esOcupado(asientoSeleccionado?.estado) ? 'Disponible' : 'Ocupar' }}
+        </button>
+        <button (click)="toggleNoDisponible()" class="btn-modal btn-gris">
+          {{ esNoDisponible(asientoSeleccionado?.estado) ? ' Disponible' : ' NO DISPONIBLE' }}
+        </button>
+      </div>
+      <ng-container *ngIf="asientoSeleccionado.estado === 'no disponible'">
         <p style="color:#888; margin-top:1rem;">Este espacio está marcado como <b>NO DISPONIBLE</b> y no puede ser reservado.</p>
       </ng-container>
-      <button (click)="cerrarModal()" style="margin-top:1.5rem;">Cerrar</button>
+      <button (click)="cerrarModal()" class="btn-modal btn-rojo" style="margin-top:2rem;">Cerrar</button>
     </div>
   </div>
 
