@@ -4,7 +4,6 @@
 
 ### Comandos para desarrollo local
 
-```bash
 # Instalar dependencias
 npm install
 
@@ -17,7 +16,7 @@ ng serve
 
 ### Comando para producción
 
-```bash
+
 # Generar build de producción (usa environment.prod.ts)
 ng build --configuration=production
 ```
