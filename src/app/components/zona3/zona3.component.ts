@@ -62,7 +62,7 @@ export class Zona3Component implements OnInit {
       const esOcupado = this.asientoSeleccionado.estado === 'ocupado';
       const mensaje = esOcupado
         ? '¿Estás seguro de liberar este espacio?'
-        : '¿Deseas ocupar este espacio?';
+        : '¿Deseas Ocupado este espacio?';
       const dialogRef = this.dialog.open(ConfirmDialogComponent, {
         data: { message: mensaje }
       });

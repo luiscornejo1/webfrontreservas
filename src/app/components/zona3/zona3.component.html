@@ -34,7 +34,7 @@
           class="btn-modal"
           [ngClass]="esOcupado(asientoSeleccionado?.estado) ? 'btn-verde' : 'btn-rojo'"
           [disabled]="esNoDisponible(asientoSeleccionado?.estado)">
-           {{ esOcupado(asientoSeleccionado?.estado) ? 'Disponible' : 'Ocupar' }}
+           {{ esOcupado(asientoSeleccionado?.estado) ? 'Disponible' : 'Ocupado' }}
         </button>
         <button (click)="toggleNoDisponible()" class="btn-modal btn-gris">
           {{ esNoDisponible(asientoSeleccionado?.estado) ? ' Disponible' : ' NO DISPONIBLE' }}

@@ -1,59 +1,142 @@
-// Modern SCSS for seat grid and modal
-.zona-zoom-container {
-  padding: 2.5rem 0 1.5rem 0;
-  .zona-zoom-img-wrapper {
-    display: flex;
-    justify-content: center;
-    .zona-zoom-img {
-      max-width: 100%;
-      border-radius: 12px;
-      box-shadow: 0 2px 12px rgba(26,35,126,0.10);
-      margin-bottom: 1.5rem;
-    }
+.btn-verde {
+  background: #43a047 !important;
+  color: #fff !important;
+  border-radius: 8px !important;
+  border: none;
+}
+.btn-verde:disabled {
+  background: #a5d6a7 !important;
+  color: #fff !important;
+  cursor: not-allowed;
+}
+.btn-verde:hover {
+  background: #388e3c !important;
+}
+// Estilos para el formulario de reserva en el modal
+.form-reserva-modal {
+  margin-top: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.form-reserva-modal label {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  align-self: flex-start;
+}
+
+.form-reserva-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  width: 100%;
+  max-width: 420px;
+}
+
+.input-reserva-modal {
+  flex: 1 1 180px;
+  padding: 0.45rem 0.8rem;
+  font-size: 1.05rem;
+  border: 1.5px solid #b0b3c6;
+  border-radius: 7px 0 0 7px;
+  outline: none;
+  margin-right: 0;
+  transition: border 0.2s;
+  height: 44px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  background: #fff;
+}
+.input-reserva-modal:focus {
+  border: 1.5px solid #1a237e;
+}
+
+
+
+@media (max-width: 600px) {
+  .form-reserva-row {
+    flex-direction: column;
+    max-width: 100%;
+    align-items: stretch;
+    gap: 0.5rem;
   }
-  h2 {
-    text-align: center;
-    color: #1a237e;
-    margin-bottom: 1.5rem;
-    font-size: 1.6rem;
-    font-weight: 700;
+  .input-reserva-modal, .btn-modal.btn-azul {
+    border-radius: 7px !important;
+    min-width: unset;
+    width: 100%;
+    margin-left: 0;
+    height: 42px;
   }
 }
-.grilla-asientos {
-  margin-bottom: 2rem;
+
+.input-reserva-modal {
+  flex: 1 1 180px;
+  padding: 0.45rem 0.8rem;
+  font-size: 1.05rem;
+  border: 1.5px solid #b0b3c6;
+  border-radius: 7px;
+  outline: none;
+  margin-right: 0.2rem;
+  transition: border 0.2s;
 }
-.modal {
-  h3 {
-    color: #1a237e;
-    font-size: 1.3rem;
-    margin-bottom: 1.2rem;
-  }
-  button {
-    margin-right: 0.7rem;
-    margin-bottom: 0.5rem;
-    &:last-child {
-      margin-right: 0;
-    }
-  }
+.input-reserva-modal:focus {
+  border: 1.5px solid #1a237e;
 }
-.no-disponible, .no\ disponible {
-  background: #e0e0e0;
-  color: #757575 !important;
-  text-decoration: line-through;
+// Botones del modal mejorados
+.modal-btn-row {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 1.2rem;
+  margin-bottom: 1.2rem;
+  flex-wrap: wrap;
+  justify-content: flex-start;
 }
-.lactario-estado-card {
-  /* ...existing code... */
-  transition: box-shadow 0.25s cubic-bezier(0.4,0.2,0.2,1), transform 0.18s cubic-bezier(0.4,0.2,0.2,1), opacity 0.18s;
+
+.btn-modal {
+  padding: 0.5rem 1.5rem;
+  font-size: 1.05rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
 }
-.lactario-estado-card:hover, .lactario-estado-card:focus {
-  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
-  transform: scale(1.06);
-  opacity: 0.97;
-  z-index: 2;
+
+
+
+.btn-rojo {
+  background: #c62828 !important;
+  color: #fff !important;
+  margin-left: 0;
+  margin-top: 0;
+  border-radius: 8px !important;
+  border: none;
 }
-.lactario-estado-card:active {
-  transform: scale(0.98);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+.btn-rojo:disabled {
+  background: #e57373 !important;
+  color: #fff !important;
+  cursor: not-allowed;
+}
+.btn-rojo:hover {
+  background: #b71c1c !important;
+}
+.btn-gris {
+  background: #888 !important;
+  color: #fff !important;
+  border-radius: 8px !important;
+  border: none;
+}
+.btn-gris:disabled {
+  background: #ccc !important;
+  color: #fff !important;
+  cursor: not-allowed;
 }
 // Estilos de zoom para la imagen general en cada zona
 .zona-zoom-container {
@@ -63,44 +146,36 @@
 }
 .zona-zoom-img-wrapper {
   width: 100%;
-  height: 350px;
+  height: 520px; /* Igual que zona1 para tamaño normal */
   overflow: hidden;
   border-radius: 16px;
   box-shadow: 0 2px 16px rgba(0,0,0,0.10);
   margin-bottom: 1.5rem;
   position: relative;
+  /* Puedes ajustar el alto según el tamaño de la imagen y el zoom que desees */
 }
 .zona-zoom-img {
   width: 100%;
   height: 100%;
   object-fit: contain; /* Mostrar la imagen completa */
   object-position: center center; /* Centrar la imagen */
-}
-.zona1-img {
-  object-position: 60% 80%; /* Ajusta para centrar la zona 1 */
-  transform: scale(1.7); /* Ajusta el zoom */
-}
-.zona2-img {
-  object-position: 60% 55%; /* Ajusta para centrar la zona 2 */
-  transform: scale(2.2);
-}
-.zona3-img {
-  /*
-    Para centrar y hacer zoom en la zona correcta:
-    - object-position: mueve la imagen (porcentaje horizontal vertical)
-    - transform: scale(X): ajusta el nivel de zoom
-    Ejemplo:
-      object-position: 60% 30%;
-      transform: scale(1);
-    Ajusta estos valores y recarga la página hasta que la zona mostrada sea la que deseas.
-  */
-  object-position: 60% 30%;
-  transform: scale(1);
   transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1), object-position 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
 }
+.zona1-img {
+  object-position: center center;
+  transform: scale(1); /* Estado inicial sin zoom */
+}
 
-.zona3-container {
-  max-width: 500px;
+.zona2-img {
+  object-position: 60% 55%; /* Ajusta para centrar la zona 2 */
+  transform: scale(1);
+}
+.zona3-img {
+  object-position: 60% 30%; /* Ajusta para centrar la zona 3 */
+  transform: scale(2.2);
+}
+.zona1-container {
+  max-width: 700px;
   margin: 2rem auto;
   padding: 2rem;
   background: #fff;
@@ -109,75 +184,97 @@
 }
 
 
-
-.lactario-estado-container {
-  display: flex;
-  justify-content: center;
-  margin: 2rem 0;
+.grilla-asientos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1rem;
+  padding: 1rem 0;
+  margin-bottom: 2rem;
 }
-.lactario-estado-card {
+
+.asiento-card {
+  position: relative;
+  width: 100%;
+  min-height: 90px;
   border-radius: 16px;
+  border: none;
   background: #f8fafc;
   box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   font-weight: 500;
-  padding: 2rem 2.5rem;
-  min-width: 220px;
-  min-height: 100px;
+  cursor: pointer;
+  padding: 1.2rem 0.5rem 0.7rem 0.5rem;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: none;
   transition: box-shadow 0.2s, transform 0.2s, opacity 0.2s;
   outline: none;
+  overflow: visible;
 }
-.lactario-estado-card.libre {
+
+.asiento-card.libre {
   background: linear-gradient(135deg, #e8f5e9 70%, #c8e6c9 100%);
   color: #388e3c;
 }
-.lactario-estado-card.ocupado {
+.asiento-card.ocupado {
   background: linear-gradient(135deg, #ffebee 70%, #ffcdd2 100%);
   color: #c62828;
 }
-.estado-texto {
-  font-size: 1.3rem;
+
+.asiento-card:hover, .asiento-card:focus {
+  box-shadow: 0 6px 24px rgba(0,0,0,0.18);
+  transform: scale(1.06);
+  opacity: 0.96;
+  z-index: 2;
+}
+
+.codigo {
+  font-size: 1.2rem;
   font-weight: bold;
+  margin-bottom: 0.3rem;
+}
+
+// Tooltip
+.tooltip {
+  visibility: hidden;
+  opacity: 0;
+  background: #222;
+  color: #fff;
   text-align: center;
+  border-radius: 8px;
+  padding: 0.4rem 0.8rem;
+  position: absolute;
+  left: 50%;
+  bottom: 110%;
+  transform: translateX(-50%);
+  font-size: 0.95rem;
+  pointer-events: none;
+  transition: opacity 0.2s, visibility 0.2s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+  white-space: nowrap;
+}
+.asiento-card:hover .tooltip,
+.asiento-card:focus .tooltip {
+  visibility: visible;
+  opacity: 1;
 }
 
 @media (max-width: 600px) {
-  .lactario-estado-card {
-    min-width: 120px;
-    font-size: 1rem;
-    padding: 1rem 0.5rem;
-  }
-  .estado-texto {
-    font-size: 1rem;
-  }
-}
-
-@media (max-width: 600px) {
-  .grilla-puestos {
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  .grilla-asientos {
+    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
     gap: 0.5rem;
   }
-  .puesto-card {
+  .asiento-card {
     min-height: 60px;
     font-size: 0.98rem;
     padding: 0.7rem 0.2rem 0.5rem 0.2rem;
   }
-  .estado-texto {
+  .codigo {
     font-size: 1rem;
   }
-// Llave sobrante eliminada y reglas antiguas removidas
-.icon.ocupado {
-  background: #e53935;
-  border: 2px solid #b71c1c;
 }
-.icon.libre {
-  background: #43a047;
-  border: 2px solid #1b5e20;
-}
+
 .modal-overlay {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
@@ -201,7 +298,7 @@
 .modal .ocupado { color: #e53935; }
 .modal .libre { color: #43a047; }
 .modal button {
-  margin-top: 1.5rem;
+  margin-top: 0rem;
   padding: 0.5rem 1.2rem;
   border: none;
   border-radius: 6px;
@@ -209,5 +306,4 @@
   color: #fff;
   font-weight: bold;
   cursor: pointer;
-}
 }

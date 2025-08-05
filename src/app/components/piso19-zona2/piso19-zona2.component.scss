@@ -1,11 +1,139 @@
-// ...existing code...
-.ocupado {
-  color: #c62828 !important;
+.btn-verde {
+  background: #43a047 !important;
+  color: #fff !important;
+  border-radius: 8px !important;
+  border: none;
 }
-.no-disponible, .no\ disponible {
-  background: #e0e0e0;
-  color: #757575 !important;
-  text-decoration: line-through;
+.btn-verde:disabled {
+  background: #a5d6a7 !important;
+  color: #fff !important;
+  cursor: not-allowed;
+}
+.btn-verde:hover {
+  background: #388e3c !important;
+}
+// Estilos para el formulario de reserva en el modal
+.form-reserva-modal {
+  margin-top: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.form-reserva-modal label {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  align-self: flex-start;
+}
+
+.form-reserva-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  width: 100%;
+  max-width: 420px;
+}
+
+.input-reserva-modal {
+  flex: 1 1 180px;
+  padding: 0.45rem 0.8rem;
+  font-size: 1.05rem;
+  border: 1.5px solid #b0b3c6;
+  border-radius: 7px 0 0 7px;
+  outline: none;
+  margin-right: 0;
+  transition: border 0.2s;
+  height: 44px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  background: #fff;
+}
+.input-reserva-modal:focus {
+  border: 1.5px solid #1a237e;
+}
+
+
+
+@media (max-width: 600px) {
+  .form-reserva-row {
+    flex-direction: column;
+    max-width: 100%;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+  .input-reserva-modal, .btn-modal.btn-azul {
+    border-radius: 7px !important;
+    min-width: unset;
+    width: 100%;
+    margin-left: 0;
+    height: 42px;
+  }
+}
+
+.input-reserva-modal {
+  flex: 1 1 180px;
+  padding: 0.45rem 0.8rem;
+  font-size: 1.05rem;
+  border: 1.5px solid #b0b3c6;
+  border-radius: 7px;
+  outline: none;
+  margin-right: 0.2rem;
+  transition: border 0.2s;
+}
+.input-reserva-modal:focus {
+  border: 1.5px solid #1a237e;
+}
+// Botones del modal mejorados
+.modal-btn-row {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.2rem;
+}
+
+.btn-modal {
+  padding: 0.5rem 1.5rem;
+  font-size: 1.05rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+
+
+
+.btn-rojo {
+  background: #c62828 !important;
+  color: #fff !important;
+  margin-left: 0;
+  margin-top: 0;
+  border-radius: 8px !important;
+  border: none;
+}
+.btn-rojo:disabled {
+  background: #e57373 !important;
+  color: #fff !important;
+  cursor: not-allowed;
+}
+.btn-rojo:hover {
+  background: #b71c1c !important;
+}
+.btn-gris {
+  background: #888 !important;
+  color: #fff !important;
+  border-radius: 8px !important;
+  border: none;
+}
+.btn-gris:disabled {
+  background: #ccc !important;
+  color: #fff !important;
+  cursor: not-allowed;
 }
 // Estilos de zoom para la imagen general en cada zona
 .zona-zoom-container {
@@ -15,12 +143,13 @@
 }
 .zona-zoom-img-wrapper {
   width: 100%;
-  height: 520px;
+  height: 520px; /* Igual que zona1 para tamaño normal */
   overflow: hidden;
   border-radius: 16px;
   box-shadow: 0 2px 16px rgba(0,0,0,0.10);
   margin-bottom: 1.5rem;
   position: relative;
+  /* Puedes ajustar el alto según el tamaño de la imagen y el zoom que desees */
 }
 .zona-zoom-img {
   width: 100%;
@@ -30,29 +159,19 @@
   transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1), object-position 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
 }
 .zona1-img {
-  object-position: 60% 80%; /* Ajusta para centrar la zona 1 */
-  transform: scale(1.7); /* Ajusta el zoom */
-}
-.zona2-img {
-  /*
-    Para centrar y hacer zoom en la zona correcta:
-    - object-position: mueve la imagen (porcentaje horizontal vertical)
-    - transform: scale(X): ajusta el nivel de zoom
-    Ejemplo:
-      object-position: 60% 55%;
-      transform: scale(1);
-    Ajusta estos valores y recarga la página hasta que la zona mostrada sea la que deseas.
-  */
   object-position: center center;
-  transform: scale(1);
-  transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1), object-position 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
+  transform: scale(1); /* Estado inicial sin zoom */
 }
 
+.zona2-img {
+  object-position: 60% 55%; /* Ajusta para centrar la zona 2 */
+  transform: scale(1);
+}
 .zona3-img {
   object-position: 60% 30%; /* Ajusta para centrar la zona 3 */
   transform: scale(2.2);
 }
-.zona2-container {
+.zona1-container {
   max-width: 700px;
   margin: 2rem auto;
   padding: 2rem;
@@ -153,32 +272,6 @@
   }
 }
 
-.asiento-btn {
-  min-width: 90px;
-  min-height: 60px;
-  border-radius: 8px;
-  border: none;
-  font-size: 1.1rem;
-  font-weight: bold;
-  cursor: pointer;
-  background: #e0e0e0;
-  color: #222;
-  transition: box-shadow 0.2s, background 0.2s;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.asiento-btn.ocupado {
-  background: #7c4dff;
-  color: #fff;
-}
-.asiento-btn.libre {
-  background: #43a047;
-  color: #fff;
-}
-.asiento-btn:hover {
-  box-shadow: 0 4px 16px rgba(0,0,0,0.18);
-  opacity: 0.95;
-}
-
 .modal-overlay {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
@@ -202,7 +295,7 @@
 .modal .ocupado { color: #e53935; }
 .modal .libre { color: #43a047; }
 .modal button {
-  margin-top: 1.5rem;
+  margin-top: 0rem;
   padding: 0.5rem 1.2rem;
   border: none;
   border-radius: 6px;

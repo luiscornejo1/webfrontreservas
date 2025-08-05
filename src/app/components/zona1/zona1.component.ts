@@ -18,11 +18,10 @@ export class Zona1Component implements OnInit {
   nombreReserva = '';
   reservaExitosa = false;
   errorReserva = '';
-
   constructor(
     private asientosService: AsientosService,
     private cdr: ChangeDetectorRef,
-    private dialog: MatDialog
+    public dialog: MatDialog
   ) {}
 
   // Helpers para la plantilla

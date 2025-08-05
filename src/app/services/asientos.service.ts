@@ -2,10 +2,11 @@ import { Asiento } from '../models/asiento.model';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class AsientosService {
-  private apiUrl = 'http://localhost:8080/api/asientos'; // Cambia la URL si tu backend es diferente
+  private apiUrl = `${environment.apiUrl}/asientos`;
 
   constructor(private http: HttpClient) {}
 

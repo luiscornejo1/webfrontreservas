@@ -18,8 +18,11 @@ ng serve
 
 
 # Generar build de producción (usa environment.prod.ts)
-ng build --configuration=production
-```
+
+ng build --configuration=production --base-href /reservas/ --deploy-url /reservas/ --output-hashing=all 
+
+ng build --prod --base-href /administrador/ --deploy-url /administrador/ --output-hashing=all --configuration=production
+``
 
 - Los archivos optimizados se generan en la carpeta `dist/`.
 - Sube el contenido de `dist/` a tu servidor web (Vercel, Netlify, Apache, Nginx, S3, etc).
